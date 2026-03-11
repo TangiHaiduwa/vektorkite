@@ -1,0 +1,14 @@
+{
+  "resourceName": "vektorkitestorage",
+  "policyUUID": "8667686d",
+  "bucketName": "vektorkite-customer-assets-dev",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger1d2d6b8c",
+  "groupAccess": {}
+}

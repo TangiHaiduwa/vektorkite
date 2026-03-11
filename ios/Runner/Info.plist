@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>VektorKite uses your location to show nearby service providers.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>VektorKite needs photo access so you can select a profile picture.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>VektorKite may save profile-related images to your photo library.</string>
 </dict>
 </plist>

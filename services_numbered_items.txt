@@ -1,0 +1,137 @@
+001: Water Supply Services
+002: Drainage & Wastewater
+003: Toilet Services
+004: Tap & Faucet Services
+005: Bathroom Services
+006: Kitchen Plumbing
+007: Geyser / Water Heater Services
+008: Gas Plumbing (Where allowed)
+009: Stormwater & Outdoor Plumbing
+010: Maintenance & Inspections
+001: Power Supply & Wiring
+002: Lighting Services
+003: Sockets & Switches
+004: DB Board / Distribution Board
+005: Appliance Installation
+006: Fault Finding & Repairs
+007: Solar & Backup Power
+008: Energy Efficiency Services
+009: Electrical Safety Services
+010: Security & Low-Voltage Systems
+001: Regular House Cleaning
+002: Deep Cleaning
+003: Move-In / Move-Out Cleaning
+004: Laundry Services
+005: Office Cleaning
+006: Shop & Mall Cleaning
+007: Restaurant & Kitchen Cleaning
+008: Carpet & Upholstery Cleaning
+009: Window Cleaning
+010: Post-Construction Cleaning
+011: Disinfection & Sanitization
+012: Waste Management
+013: Yard & Outdoor Cleaning
+014: Pressure Washing
+001: Lawn Care
+002: Garden Maintenance
+003: Hedge & Tree Services
+004: Planting Services
+005: Landscaping (Light to Medium)
+006: Irrigation Systems
+007: Yard & Plot Cleaning
+008: Seasonal Services
+001: General Repairs
+002: Mounting & Installations
+003: Furniture Services
+004: Minor Plumbing Fixes
+005: Minor Electrical Fixes
+006: Doors, Windows & Locks
+007: Painting (Small Jobs)
+008: Tiling & Flooring (Light Work)
+009: Outdoor Repairs
+010: Emergency Fixes
+001: Computer & Laptop Support
+002: Internet & Network Support
+003: Email & Account Support
+004: Printer & Scanner Support
+005: Device Setup & Installation
+006: Cybersecurity (Everyday Level)
+007: Data Recovery & Backup
+008: Office IT Support
+009: Systems & Software Support
+010: Website & Domain Support
+011: Cloud & Remote Work
+001: Primary School Tutoring
+002: High School Tutoring
+003: Exam & Test Prep
+004: Computer & IT Tutoring
+005: University & College Tutoring
+006: Language Classes
+007: Study & Productivity Skills
+008: Online Tutoring
+001: Document & Admin Agent
+002: Government & Utility Agent
+003: Rental Agent / Property Finder
+004: Property Management Agent
+005: Business Registration Agent
+006: Procurement / Supply Agent
+007: Travel Agent
+008: Car & Transport Agent
+009: Student Application Agent
+010: Job & Recruitment Agent (Light Level)
+011: Online Services Agent
+001: Roadside Assistance
+002: Towing Services
+003: Mobile Car Wash
+004: Vehicle Detailing
+005: Minor Mechanical Services
+006: Tyre Services
+007: Driver Services
+008: Vehicle Recovery & Delivery
+009: Vehicle Registration Agent
+010: Inspection & Compliance
+001: Hourly Babysitting
+002: After-School Babysitting
+003: Overnight Babysitting
+004: Tutoring + Play
+005: Special Needs Babysitting
+006: Party/Event Babysitting
+007: Last-Minute / On-Demand Babysitting
+001: Custom Products
+002: Gift & Event Items
+003: Clothing & Accessories
+004: Repair & Alteration
+005: Crochet Lessons / Workshops
+006: DIY Kits & Materials
+007: Home Décor & Lifestyle
+008: Seasonal / On-Demand Requests
+001: Event Photography
+002: Portrait & Personal Photography
+003: Product & Commercial Photography
+004: Freelance / On-Demand Shoots
+005: Photography + Editing Services
+006: Specialty Photography
+007: Workshops & Lessons
+008: On-Demand Photography
+001: Floor Tiling
+002: Wall Tiling
+003: Outdoor & Patio Tiling
+004: Interlock / Paving
+005: Repair & Maintenance
+006: Custom & Decorative Work
+007: Installation Services
+008: Commercial Services
+001: General Welding Repairs
+002: Fabrication & Construction
+003: Vehicle & Automotive Welding
+004: Pipe & Plumbing Welding
+005: Industrial / Commercial Welding
+006: Custom & Decorative Work
+007: Emergency Welding Services
+008: Maintenance & Retainer Contracts
+001: Shopping & Delivery
+002: Administrative Tasks
+003: Home & Property Assistance
+004: Professional / Business Assistance
+005: Elderly / Care Assistance
+006: On-Demand / Emergency Assistance

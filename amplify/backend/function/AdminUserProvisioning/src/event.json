@@ -1,0 +1,15 @@
+{
+  "arguments": {
+    "email": "admin@example.com",
+    "temporaryPassword": "TempPass123!",
+    "givenName": "Admin",
+    "familyName": "User"
+  },
+  "identity": {
+    "claims": {
+      "cognito:groups": [
+        "ADMIN"
+      ]
+    }
+  }
+}

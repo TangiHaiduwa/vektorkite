@@ -1,0 +1,153 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: VektorKite Provider Liveness API (Step 7 backend skeleton)
+
+Parameters:
+  CognitoUserPoolId:
+    Type: String
+    Description: Cognito User Pool ID used by mobile apps.
+  CognitoAppClientId:
+    Type: String
+    Description: Cognito App Client ID used by mobile apps.
+  AwsRegion:
+    Type: String
+    Default: af-south-1
+  VerificationBucketName:
+    Type: String
+    Description: S3 bucket where provider verification docs are uploaded.
+  SimilarityThreshold:
+    Type: Number
+    Default: 85
+    MinValue: 50
+    MaxValue: 99
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 30
+    MemorySize: 512
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref LivenessSessionsTable
+        VERIFICATION_BUCKET: !Ref VerificationBucketName
+        SIMILARITY_THRESHOLD: !Ref SimilarityThreshold
+        AWS_REGION: !Ref AwsRegion
+    Architectures:
+      - x86_64
+
+Resources:
+  LivenessHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowHeaders:
+          - Authorization
+          - Content-Type
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowOrigins:
+          - '*'
+      Auth:
+        DefaultAuthorizer: CognitoJwtAuthorizer
+        Authorizers:
+          CognitoJwtAuthorizer:
+            JwtConfiguration:
+              issuer: !Sub https://cognito-idp.${AwsRegion}.amazonaws.com/${CognitoUserPoolId}
+              audience:
+                - !Ref CognitoAppClientId
+            IdentitySource: '$request.header.Authorization'
+
+  LivenessStartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.start_session
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref LivenessSessionsTable
+        - S3ReadPolicy:
+            BucketName: !Ref VerificationBucketName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - rekognition:CompareFaces
+                - rekognition:DetectFaces
+              Resource: '*'
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LivenessHttpApi
+            Path: /liveness/sessions/start
+            Method: POST
+
+  LivenessEvaluateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.evaluate_session
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref LivenessSessionsTable
+        - S3ReadPolicy:
+            BucketName: !Ref VerificationBucketName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - rekognition:CompareFaces
+                - rekognition:DetectFaces
+              Resource: '*'
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LivenessHttpApi
+            Path: /liveness/sessions/{sessionId}/evaluate
+            Method: POST
+
+  LivenessGetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.get_session
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref LivenessSessionsTable
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref LivenessHttpApi
+            Path: /liveness/sessions/{sessionId}
+            Method: GET
+
+  LivenessSessionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: sessionId
+          AttributeType: S
+        - AttributeName: providerId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: sessionId
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: byProvider
+          KeySchema:
+            - AttributeName: providerId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+
+Outputs:
+  LivenessApiBaseUrl:
+    Description: Base URL for provider app Liveness API integration.
+    Value: !Sub https://${LivenessHttpApi}.execute-api.${AwsRegion}.amazonaws.com/prod

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "vektorkite",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authvektorkitea5c514e0"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}

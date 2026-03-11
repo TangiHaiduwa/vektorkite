@@ -1,0 +1,10 @@
+{
+  "name": "AdminUserProvisioning",
+  "version": "1.0.0",
+  "description": "Creates Cognito admin users and assigns ADMIN group",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.878.0"
+  }
+}

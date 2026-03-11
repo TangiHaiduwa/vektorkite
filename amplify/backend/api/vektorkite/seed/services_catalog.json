@@ -1,0 +1,261 @@
+{
+  "categories": [
+    {
+      "id": "plumbing",
+      "name": "Plumbing",
+      "slug": "plumbing",
+      "sortOrder": 1,
+      "subcategories": [
+        "Water Supply Services",
+        "Drainage & Wastewater",
+        "Toilet Services",
+        "Tap & Faucet Services",
+        "Bathroom Services",
+        "Kitchen Plumbing",
+        "Geyser / Water Heater Services",
+        "Gas Plumbing (Where allowed)",
+        "Stormwater & Outdoor Plumbing",
+        "Maintenance & Inspections"
+      ]
+    },
+    {
+      "id": "electrical",
+      "name": "Electrical",
+      "slug": "electrical",
+      "sortOrder": 2,
+      "subcategories": [
+        "Power Supply & Wiring",
+        "Lighting Services",
+        "Sockets & Switches",
+        "DB Board / Distribution Board",
+        "Appliance Installation",
+        "Fault Finding & Repairs",
+        "Solar & Backup Power",
+        "Energy Efficiency Services",
+        "Electrical Safety Services",
+        "Security & Low-Voltage Systems"
+      ]
+    },
+    {
+      "id": "cleaning",
+      "name": "Cleaning",
+      "slug": "cleaning",
+      "sortOrder": 3,
+      "subcategories": [
+        "Regular House Cleaning",
+        "Deep Cleaning",
+        "Move-In / Move-Out Cleaning",
+        "Laundry Services",
+        "Office Cleaning",
+        "Shop & Mall Cleaning",
+        "Restaurant & Kitchen Cleaning",
+        "Carpet & Upholstery Cleaning",
+        "Window Cleaning",
+        "Post-Construction Cleaning",
+        "Disinfection & Sanitization",
+        "Waste Management",
+        "Yard & Outdoor Cleaning",
+        "Pressure Washing"
+      ]
+    },
+    {
+      "id": "gardening",
+      "name": "Gardening & Landscaping",
+      "slug": "gardening-landscaping",
+      "sortOrder": 4,
+      "subcategories": [
+        "Lawn Care",
+        "Garden Maintenance",
+        "Hedge & Tree Services",
+        "Planting Services",
+        "Landscaping (Light to Medium)",
+        "Irrigation Systems",
+        "Yard & Plot Cleaning",
+        "Seasonal Services"
+      ]
+    },
+    {
+      "id": "handyman",
+      "name": "Handyman",
+      "slug": "handyman",
+      "sortOrder": 5,
+      "subcategories": [
+        "General Repairs",
+        "Mounting & Installations",
+        "Furniture Services",
+        "Minor Plumbing Fixes",
+        "Minor Electrical Fixes",
+        "Doors, Windows & Locks",
+        "Painting (Small Jobs)",
+        "Tiling & Flooring (Light Work)",
+        "Outdoor Repairs",
+        "Emergency Fixes"
+      ]
+    },
+    {
+      "id": "it-support",
+      "name": "IT Support",
+      "slug": "it-support",
+      "sortOrder": 6,
+      "subcategories": [
+        "Computer & Laptop Support",
+        "Internet & Network Support",
+        "Email & Account Support",
+        "Printer & Scanner Support",
+        "Device Setup & Installation",
+        "Cybersecurity (Everyday Level)",
+        "Data Recovery & Backup",
+        "Office IT Support",
+        "Systems & Software Support",
+        "Website & Domain Support",
+        "Cloud & Remote Work"
+      ]
+    },
+    {
+      "id": "tutoring",
+      "name": "Tutoring",
+      "slug": "tutoring",
+      "sortOrder": 7,
+      "subcategories": [
+        "Primary School Tutoring",
+        "High School Tutoring",
+        "Exam & Test Prep",
+        "Computer & IT Tutoring",
+        "University & College Tutoring",
+        "Language Classes",
+        "Study & Productivity Skills",
+        "Online Tutoring"
+      ]
+    },
+    {
+      "id": "agent-services",
+      "name": "Agent Services",
+      "slug": "agent-services",
+      "sortOrder": 8,
+      "subcategories": [
+        "Document & Admin Agent",
+        "Government & Utility Agent",
+        "Rental Agent / Property Finder",
+        "Property Management Agent",
+        "Business Registration Agent",
+        "Procurement / Supply Agent",
+        "Travel Agent",
+        "Car & Transport Agent",
+        "Student Application Agent",
+        "Job & Recruitment Agent (Light Level)",
+        "Online Services Agent"
+      ]
+    },
+    {
+      "id": "auto-services",
+      "name": "Automotive Services",
+      "slug": "automotive-services",
+      "sortOrder": 9,
+      "subcategories": [
+        "Roadside Assistance",
+        "Towing Services",
+        "Mobile Car Wash",
+        "Vehicle Detailing",
+        "Minor Mechanical Services",
+        "Tyre Services",
+        "Driver Services",
+        "Vehicle Recovery & Delivery",
+        "Vehicle Registration Agent",
+        "Inspection & Compliance"
+      ]
+    },
+    {
+      "id": "childcare",
+      "name": "Babysitting & Childcare",
+      "slug": "babysitting-childcare",
+      "sortOrder": 10,
+      "subcategories": [
+        "Hourly Babysitting",
+        "After-School Babysitting",
+        "Overnight Babysitting",
+        "Tutoring + Play",
+        "Special Needs Babysitting",
+        "Party/Event Babysitting",
+        "Last-Minute / On-Demand Babysitting"
+      ]
+    },
+    {
+      "id": "crafts",
+      "name": "Handmade & Crochet",
+      "slug": "handmade-crochet",
+      "sortOrder": 11,
+      "subcategories": [
+        "Custom Products",
+        "Gift & Event Items",
+        "Clothing & Accessories",
+        "Repair & Alteration",
+        "Crochet Lessons / Workshops",
+        "DIY Kits & Materials",
+        "Home Decor & Lifestyle",
+        "Seasonal / On-Demand Requests"
+      ]
+    },
+    {
+      "id": "photography",
+      "name": "Photography",
+      "slug": "photography",
+      "sortOrder": 12,
+      "subcategories": [
+        "Event Photography",
+        "Portrait & Personal Photography",
+        "Product & Commercial Photography",
+        "Freelance / On-Demand Shoots",
+        "Photography + Editing Services",
+        "Specialty Photography",
+        "Workshops & Lessons",
+        "On-Demand Photography"
+      ]
+    },
+    {
+      "id": "tiling",
+      "name": "Tiling & Paving",
+      "slug": "tiling-paving",
+      "sortOrder": 13,
+      "subcategories": [
+        "Floor Tiling",
+        "Wall Tiling",
+        "Outdoor & Patio Tiling",
+        "Interlock / Paving",
+        "Repair & Maintenance",
+        "Custom & Decorative Work",
+        "Installation Services",
+        "Commercial Services"
+      ]
+    },
+    {
+      "id": "welding",
+      "name": "Welding",
+      "slug": "welding",
+      "sortOrder": 14,
+      "subcategories": [
+        "General Welding Repairs",
+        "Fabrication & Construction",
+        "Vehicle & Automotive Welding",
+        "Pipe & Plumbing Welding",
+        "Industrial / Commercial Welding",
+        "Custom & Decorative Work",
+        "Emergency Welding Services",
+        "Maintenance & Retainer Contracts"
+      ]
+    },
+    {
+      "id": "personal-assistant",
+      "name": "Personal Assistant",
+      "slug": "personal-assistant",
+      "sortOrder": 15,
+      "subcategories": [
+        "Shopping & Delivery",
+        "Administrative Tasks",
+        "Home & Property Assistance",
+        "Professional / Business Assistance",
+        "Elderly / Care Assistance",
+        "On-Demand / Emergency Assistance"
+      ]
+    }
+  ]
+}

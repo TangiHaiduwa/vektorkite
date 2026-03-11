@@ -1,0 +1,37 @@
+{
+  "devv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-vektorkite-devv-36781-authRole",
+      "UnauthRoleArn": "arn:aws:iam::937451648015:role/amplify-vektorkite-devv-36781-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::937451648015:role/amplify-vektorkite-devv-36781-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-vektorkite-devv-36781-deployment",
+      "UnauthRoleName": "amplify-vektorkite-devv-36781-unauthRole",
+      "StackName": "amplify-vektorkite-devv-36781",
+      "StackId": "arn:aws:cloudformation:eu-north-1:937451648015:stack/amplify-vektorkite-devv-36781/27eab1e0-0c52-11f1-9894-0aeb9f9180ab",
+      "AmplifyAppId": "d3k6iymy8w8p7e"
+    },
+    "categories": {
+      "auth": {
+        "vektorkitea5c514e0": {}
+      },
+      "api": {
+        "vektorkite": {}
+      },
+      "function": {
+        "AdminUserProvisioning": {
+          "deploymentBucketName": "amplify-vektorkite-devv-36781-deployment",
+          "s3Key": "amplify-builds/AdminUserProvisioning-57532f745a554968344c-build.zip",
+          "authvektorkitea5c514e0UserPoolId": ""
+        },
+        "S3Trigger1d2d6b8c": {
+          "deploymentBucketName": "amplify-vektorkite-devv-36781-deployment",
+          "s3Key": "amplify-builds/S3Trigger1d2d6b8c-2f355547375737373734-build.zip"
+        }
+      },
+      "storage": {
+        "vektorkitestorage": {}
+      }
+    }
+  }
+}

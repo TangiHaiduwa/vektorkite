@@ -1,0 +1,10 @@
+{
+  "permissions": {},
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "authvektorkitea5c514e0UserPoolId",
+      "environmentVariableName": "USER_POOL_ID"
+    }
+  ]
+}

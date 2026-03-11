@@ -1,0 +1,347 @@
+﻿# VektorKite customer app MVP schema
+# Auth mode: Amazon Cognito User Pools
+
+enum BookingStatus {
+  PENDING_MATCH
+  REQUESTED
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TicketStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  CLOSED
+}
+
+enum TicketType {
+  GENERAL_SUPPORT
+  REPORT_PROVIDER
+  DISPUTE_BOOKING
+}
+
+enum StoreStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AdPlacement {
+  HOME
+  SEARCH
+  CATEGORY
+}
+
+enum AdCampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ENDED
+}
+
+enum UserRole {
+  CUSTOMER
+  PROVIDER
+}
+
+enum ProviderVerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+type UserProfile
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: AWSEmail!
+  phone: AWSPhone
+  avatarKey: String
+  addressText: String
+  role: UserRole! @default(value: "CUSTOMER")
+  isActive: Boolean! @default(value: "true")
+}
+
+type Category
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  description: String
+  iconKey: String
+  isActive: Boolean! @default(value: "true")
+  sortOrder: Int
+}
+
+type ServiceCategory
+  @model(queries: { get: "getServiceCategory", list: "listServiceCategories" })
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  iconKey: String
+  isActive: Boolean! @default(value: "true")
+  sortOrder: Int
+  subcategories: [ServiceSubcategory] @hasMany(indexName: "byServiceCategory", fields: ["id"])
+}
+
+type ServiceSubcategory
+  @model(queries: { get: "getServiceSubcategory", list: "listServiceSubcategories" })
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  categoryId: ID! @index(name: "byServiceCategory", queryField: "serviceSubcategoriesByCategory")
+  name: String!
+  slug: String!
+  description: String
+  isActive: Boolean! @default(value: "true")
+  sortOrder: Int
+  category: ServiceCategory @belongsTo(fields: ["categoryId"])
+  providerOfferings: [ProviderServiceOffering] @hasMany(indexName: "byServiceSubcategory", fields: ["id"])
+}
+
+type ProviderServiceOffering
+  @model(queries: { get: "getProviderServiceOffering", list: "listProviderServiceOfferings" })
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "providerId", identityClaim: "sub", operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  providerId: ID! @index(name: "byProvider", queryField: "providerServiceOfferingsByProvider")
+  subcategoryId: ID! @index(name: "byServiceSubcategory", queryField: "providerServiceOfferingsBySubcategory")
+  isActive: Boolean! @default(value: "true")
+  hourlyRate: Float
+  calloutFee: Float
+  currency: String! @default(value: "NAD")
+  experienceYears: Int
+  provider: Provider @belongsTo(fields: ["providerId"])
+  subcategory: ServiceSubcategory @belongsTo(fields: ["subcategoryId"])
+}
+
+type Provider
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "id", identityClaim: "sub", operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  displayName: String!
+  bio: String
+  phone: AWSPhone
+  email: AWSEmail
+  profileImageKey: String
+  isVerified: Boolean! @default(value: "false")
+  isSuspended: Boolean! @default(value: "false")
+  verificationStatus: ProviderVerificationStatus! @default(value: "PENDING")
+  verificationNotes: String
+  idDocumentPath: String
+  proofOfAddressPath: String
+  categoryIds: [ID!]
+  subcategoryIds: [ID!]
+  ratingAverage: Float
+  ratingCount: Int @default(value: "0")
+  hourlyRate: Float
+  calloutFee: Float
+  currency: String! @default(value: "NAD")
+  lat: Float
+  lng: Float
+  serviceAreaText: String
+  serviceOfferings: [ProviderServiceOffering] @hasMany(indexName: "byProvider", fields: ["id"])
+}
+
+type Store
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "ownerSub", identityClaim: "sub", operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  ownerSub: ID! @index(name: "byOwnerSub", queryField: "storesByOwnerSub")
+  name: String!
+  phone: AWSPhone
+  city: String!
+  address: String!
+  logoKey: String
+  status: StoreStatus! @default(value: "PENDING")
+  products: [Product] @hasMany(indexName: "byStore", fields: ["id"])
+  campaigns: [AdCampaign] @hasMany(indexName: "byAdStore", fields: ["id"])
+}
+
+type Product
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "ownerSub", identityClaim: "sub", operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  ownerSub: ID! @index(name: "byProductOwnerSub", queryField: "productsByOwnerSub")
+  storeId: ID! @index(name: "byStore", queryField: "productsByStore")
+  categoryId: ID! @index(name: "productsByCategory", queryField: "productsByCategory")
+  subcategoryId: ID @index(name: "productsBySubcategory", queryField: "productsBySubcategory")
+  title: String!
+  description: String
+  priceNAD: Float!
+  images: [String!]
+  stockQty: Int! @default(value: "0")
+  isActive: Boolean! @default(value: "true")
+  isSponsored: Boolean! @default(value: "false")
+  isFlagged: Boolean! @default(value: "false")
+  store: Store @belongsTo(fields: ["storeId"])
+  campaigns: [AdCampaign] @hasMany(indexName: "byAdProduct", fields: ["id"])
+}
+
+type AdCampaign
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "ownerSub", identityClaim: "sub", operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  ownerSub: ID! @index(name: "byAdOwnerSub", queryField: "adCampaignsByOwnerSub")
+  storeId: ID! @index(name: "byAdStore", queryField: "adCampaignsByStore")
+  productId: ID @index(name: "byAdProduct", queryField: "adCampaignsByProduct")
+  placement: AdPlacement!
+  startDate: AWSDate
+  endDate: AWSDate
+  status: AdCampaignStatus! @default(value: "DRAFT")
+  store: Store @belongsTo(fields: ["storeId"])
+  product: Product @belongsTo(fields: ["productId"])
+}
+
+type Booking
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: groups, groups: ["ADMIN"], operations: [read, update, delete] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  customerId: ID! @index(name: "byCustomer", queryField: "bookingsByCustomer")
+  categoryId: ID! @index(name: "byCategory", queryField: "bookingsByCategory")
+  subcategoryId: ID @index(name: "bySubcategory", queryField: "bookingsBySubcategory")
+  providerId: ID @index(name: "byProvider", queryField: "bookingsByProvider")
+  providerOfferingId: ID @index(name: "byProviderOffering", queryField: "bookingsByProviderOffering")
+  status: BookingStatus! @default(value: "PENDING_MATCH")
+  description: String!
+  addressText: String!
+  lat: Float
+  lng: Float
+  isScheduled: Boolean! @default(value: "false")
+  scheduledFor: AWSDateTime
+  requestedAt: AWSDateTime
+  estimatedMin: Float
+  estimatedMax: Float
+  finalPrice: Float
+  currency: String! @default(value: "NAD")
+  customerNote: String
+}
+
+type Review
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["ADMIN"], operations: [read, delete] }
+    ]
+  ) {
+  id: ID!
+  bookingId: ID! @index(name: "byBooking", queryField: "reviewsByBooking")
+  providerId: ID! @index(name: "byProvider", queryField: "reviewsByProvider")
+  rating: Int!
+  comment: String
+}
+
+type SupportTicket
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: groups, groups: ["ADMIN"], operations: [read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  type: TicketType!
+  status: TicketStatus! @default(value: "OPEN")
+  subject: String!
+  message: String!
+  bookingId: ID @index(name: "ticketsByBooking", queryField: "supportTicketsByBooking")
+  providerId: ID @index(name: "ticketsByProvider", queryField: "supportTicketsByProvider")
+  adminNotes: String
+}
+
+type AuditLog
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["ADMIN"], operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  actorSub: ID
+  actorEmail: AWSEmail
+  action: String!
+  entityType: String!
+  entityId: ID
+  metadataJson: AWSJSON
+}
+
+type Mutation {
+  createAdminUser(
+    email: AWSEmail!
+    temporaryPassword: String!
+    givenName: String
+    familyName: String
+  ): Boolean
+    @function(name: "AdminUserProvisioning-${env}")
+    @auth(rules: [{ allow: groups, groups: ["ADMIN"] }])
+  adminSetUserPassword(
+    email: AWSEmail!
+    newPassword: String!
+    permanent: Boolean
+  ): Boolean
+    @function(name: "AdminUserProvisioning-${env}")
+    @auth(rules: [{ allow: groups, groups: ["ADMIN"] }])
+}

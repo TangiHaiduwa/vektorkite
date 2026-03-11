@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../vektorkit_pro"
+		},
+		{
+			"path": "../starkite_admin"
+		},
+		{
+			"path": "../admin_starkite"
+		}
+	],
+	"settings": {}
+}
